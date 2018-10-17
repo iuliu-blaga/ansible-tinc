@@ -1,31 +1,32 @@
 ---
-
-- name: install tinc
-  package: >
-    name=tinc
+- name: install epel-release
+  yum: >
+    name=epel-release
     state=latest
  
+- name: install tinc
+  yum: >
+    name=tinc
+    state=latest
+    enablerepo=epel
+    update_cache=yes
+
 - name: install net-tools
-  package: >
+  yum: >
     name=net-tools
     state=latest
-  when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7")
+  when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7") 
 
-- name: install rsync
-  package: >
-    name=rsync
-    state=latest
-
-- name: create tinc systemd service file (debian 9 & ubuntu 18)
+- name: create tinc systemd service file (redhat 7)
   template: >
     src=tinc.service.j2
     dest=/etc/systemd/system/tinc.service
   register: tinc_service_file
-  when: (ansible_distribution == "Debian" and ansible_distribution_major_version == "9") or (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18")
+  when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == 7)
 
 - name: systemctl daemon-reload
   shell: systemctl daemon-reload
-  when: tinc_service_file.changed
+  when: (tinc_service_file.changed and ansible_os_family == "RedHat" and ansible_distribution_major_version == 7)
 
 - name: ensure tinc netname directory exists
   file: >
