@@ -1,6 +1,6 @@
 # Introduction
 
-Ansible playbook to configure tinc mesh VPN network, designed to work on CentOS 6/7, Debian 9, Ubuntu 18.04 and Ubuntu 16.04
+Ansible playbook to configure tinc mesh VPN network, designed to work on CentOS/RH 6/7.
 
 This sets up a tinc VPN between several servers. It also adds /etc/hosts entries for the inventory hostnames to resolve to the VPN IP addresses.
 
