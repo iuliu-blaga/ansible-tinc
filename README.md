@@ -1,6 +1,6 @@
 # Introduction
 
-Ansible playbook used at https://codengine.io to configure tinc mesh VPN network , tested on Debian 9, Ubuntu 18.04 and Ubuntu 16.04
+Ansible playbook to configure tinc mesh VPN network, designed to work on CentOS 6/7, Debian 9, Ubuntu 18.04 and Ubuntu 16.04
 
 This sets up a tinc VPN between several servers. It also adds /etc/hosts entries for the inventory hostnames to resolve to the VPN IP addresses.
 
@@ -8,7 +8,7 @@ This sets up a tinc VPN between several servers. It also adds /etc/hosts entries
 
 Your local machine (where Ansible is installed) must be able to log in to the remote servers as "root", preferably with passwordless public SSH key, which is specified as the `remote_user` in `/ansible.cfg`.
 
-By default, this playbook will bind tinc to the IP address on the `eth1` interface (private network interface on DigitalOcean Droplets). See the "Review Group Variables" section to change this.
+By default, this playbook will bind tinc to the IP address on the `eth1` interface. See the "Review Group Variables" section to change this.
 
 ## Preparation
 
